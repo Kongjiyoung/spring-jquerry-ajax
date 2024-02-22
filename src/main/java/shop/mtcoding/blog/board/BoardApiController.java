@@ -39,7 +39,7 @@ public class BoardApiController { //ajax를 위한 컨트롤러 따로 만듬
         }
         boardRepository.deleteById(id);
 
-        return  new ApiUtil<>(null);
+        return  new ApiUtil<>(null); //성공여부만 알기 위해서
     }
 
     @GetMapping(value = "/api/boards") //json으로 보는 주소

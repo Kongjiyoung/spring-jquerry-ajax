@@ -25,10 +25,11 @@
             url: `/api/boards/${boardId}`,
             type: "delete"
         }).done((res)=>{
+            console.log(res);
             $(`#board-${boardId}`).remove();
         }).fail((res)=>{
             alert(res.responseJSON.msg);
-            location.reload(); //f5
+            //location.reload(); //f5
         });
     }
 
@@ -42,12 +43,12 @@
         let boardList = res.body;
 
         boardList.forEach((board)=>{
-            $("#board-box").append(render(board));
+            $("#board-box").append(render(board)); //함수이름이 render 그치만 render로 쓰자 뿌려주니깐
         });
-    }).fail((res) => {
+    }).fail((res) => { //res대신 아무거나 써도 된다. response니깐  res쓰자
         // console.log("통신 실패");
         // console.log(res);
-        alert(res.responseJSON.msg);
+        alert(res.responseJSON.msg); //responseJSON 데이터가 담겨있음 그걸 쓴겨
     }); //200으로 떨어지면 done으로 가고 아니면 fail로 감 //통신이 끝나면 done이 실행
 
 

@@ -26,15 +26,14 @@
             content: $("#content").val(),
             author: $("#author").val()
         };
-        console.log(board);
 
         let boardJson = JSON.stringify(board);
-        console.log(boardJson);
 
         $.ajax({
             url : "/api/boards",
             type : "post",
             data : JSON.stringify(board),
+            // data : boardJson, // 요것두 될 것 같은데
             contentType: "application/json; charset=utf-8"
         }).done((res)=>{
             location.href="/";

@@ -27,15 +27,15 @@
             author: $("#author").val()
 
         };
-        console.log(board);
+       alert("board: "+board)
 
-        let boardJson = JSON.stringify(board);
-        console.log(boardJson);
+        let boardJson = JSON.stringify(board);//
+      alert("boardJson: "+boardJson)
 
         $.ajax({
             url : `/api/boards/{{board.id}}`,
             type : "put",
-            data : JSON.stringify(board),
+            data : JSON.stringify(board), //자바스크립트와 자바를 오가는 거 json 통신해야하기 때문이다
             contentType : "application/json; charset=utf-8"
         }).done((res)=>{
             location.href="/";
