@@ -1,5 +1,6 @@
 package shop.mtcoding.blog.board;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BoardController {
 
     private final BoardRepository boardRepository;
-
     @GetMapping("/")
     public String index() {
         return "index";
@@ -24,7 +24,10 @@ public class BoardController {
     }
 
     @GetMapping("/board/{id}/updateForm")
-    public String updateForm(@PathVariable int id) {
+    public String updateForm(@PathVariable int id,HttpServletRequest request) {
+        Board board = boardRepository.selectOne(id);
+        System.out.println(board);
+        request.setAttribute("board",board);
         return "board/updateForm";
     }
 
@@ -35,6 +38,7 @@ public class BoardController {
 
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable int id){
+
         return "redirect:/";
     }
 

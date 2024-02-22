@@ -6,18 +6,45 @@
         <div class="card-body">
             <form action="#">
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Enter author" name="author">
+                    <input type="text" class="form-control" placeholder="" id="author">
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Enter title" name="title">
+                    <input type="text" class="form-control" placeholder="" id="title">
                 </div>
                 <div class="mb-3">
-                    <textarea class="form-control" rows="5" name="content"></textarea>
+                    <textarea class="form-control" rows="5" id="content"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary form-control">글수정완료</button>
+                <button type="button" onclick="btnUpdate()" class="btn btn-primary form-control">수정</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    function btnUpdate(){
+        let board ={
+            title: $("#title").val(),
+            content: $("#content").val(),
+            author: $("#author").val()
+
+        };
+        console.log(board);
+
+        let boardJson = JSON.stringify(board);
+        console.log(boardJson);
+
+        $.ajax({
+            url : `/api/boards/{{board.id}}`,
+            type : "put",
+            data : JSON.stringify(board),
+            contentType : "application/json; charset=utf-8"
+        }).done((res)=>{
+            location.href="/";
+        }).fail((res)=>{
+            alert(res.responseJson.msg);
+
+        });
+    }
+
+</script>
 
 {{> layout/footer}}
